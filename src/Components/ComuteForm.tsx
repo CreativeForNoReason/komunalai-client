@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import './Comute.css';
 import TableRow from './TableRow';
 
@@ -8,6 +8,15 @@ type FormData = {
   lastName: string;
   email: string;
 };
+
+export const FormDataContext = createContext({
+  formData: {
+    firstName: '',
+    lastName: '',
+    email: '',
+  },
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
+});
 
 const ComuteForm = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -31,6 +40,7 @@ const ComuteForm = () => {
   };
 
   return (
+  <FormDataContext.Provider value={{ formData, handleChange }}>
     <form onSubmit={handleSubmit}>
       <table className="custom-table">
         <tbody>
@@ -60,6 +70,7 @@ const ComuteForm = () => {
 
       <button type="submit">Save</button>
     </form>
+  </FormDataContext.Provider>
   );
 };
 
