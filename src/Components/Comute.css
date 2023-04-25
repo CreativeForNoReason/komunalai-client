@@ -1,0 +1,13 @@
+/* CSS code */
+.custom-table td {
+    text-align: left;
+}
+
+.custom-table label {
+    margin-right: 4px;
+}
+  
+.custom-table td:last-child {
+    text-align: right;
+}
+  
