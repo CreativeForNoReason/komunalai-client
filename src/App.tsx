@@ -1,16 +1,15 @@
+// App.tsx
 import React from 'react';
-import ComuteForm from './Components/ComuteForm';
-import FormDataDisplay from './Components/FormDataDisplay';
- 
+import FormContainer from './Components/FormContainer';
+
 const App = () => {
   return (
     <div>
       <h1>My Form</h1>
-      <ComuteForm />
-      <hr></hr>
-      <FormDataDisplay />
+      <FormContainer />
     </div>
   );
 };
 
 export default App;
+

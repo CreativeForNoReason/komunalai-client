@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { FormDataContext } from './ComuteForm';
+import { FormDataContext } from './FormContainer';
 
 const FormDataDisplay = () => {
   // Consume form data from the context
-  const { formData } = useContext(FormDataContext);
+  const { submittedData } = useContext(FormDataContext);
 
   return (
     <table className="form-data-display">
@@ -16,9 +16,9 @@ const FormDataDisplay = () => {
       </thead>
       <tbody>
         <tr>
-          <td>{formData.firstName}</td>
-          <td>{formData.lastName}</td>
-          <td>{formData.email}</td>
+          <td>{submittedData.firstName}</td>
+          <td>{submittedData.lastName}</td>
+          <td>{submittedData.email}</td>
         </tr>
       </tbody>
     </table>
