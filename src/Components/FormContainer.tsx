@@ -2,8 +2,13 @@
 import React, { createContext } from 'react';
 import ComuteForm from './ComuteForm';
 import FormDataDisplay from './FormDataDisplay';
+import { FormData } from '../Types/FormData';
 
-export const FormDataContext = createContext({
+export const FormDataContext = createContext<{
+    formData: FormData;
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    submittedData: FormData;
+  }>({
     formData: {
       firstName: '',
       lastName: '',
@@ -18,13 +23,13 @@ export const FormDataContext = createContext({
   });
 
 const FormContainer = () => {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = React.useState<FormData>({
     firstName: '',
     lastName: '',
     email: '',
   });
 
-  const [submittedData, setSubmittedData] = React.useState({
+  const [submittedData, setSubmittedData] = React.useState<FormData>({
     firstName: '',
     lastName: '',
     email: '',
