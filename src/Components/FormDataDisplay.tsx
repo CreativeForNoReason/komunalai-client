@@ -1,12 +1,13 @@
 import { useContext } from 'react';
 import { FormDataContext } from './FormContainer';
+import Table from 'react-bootstrap/esm/Table';
 
 const FormDataDisplay = () => {
   // Consume form data from the context
   const { submittedData } = useContext(FormDataContext);
 
   return (
-    <table className="form-data-display">
+    <Table striped bordered hover>
       <thead>
         <tr>
           <th>First Name</th>
@@ -21,7 +22,7 @@ const FormDataDisplay = () => {
           <td>{submittedData.email}</td>
         </tr>
       </tbody>
-    </table>
+    </Table>
   );
 };
 
