@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/esm/Container';
 const App = () => {
   return (
     <Container>
-      <h1>My Form</h1>
+      <h1>Makarenbo</h1>
       <FormContainer />
     </Container>
   );

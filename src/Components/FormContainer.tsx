@@ -5,34 +5,70 @@ import FormDataDisplay from './FormDataDisplay';
 import { FormData } from '../Types/FormData';
 
 export const FormDataContext = createContext<{
-    formData: FormData;
-    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    submittedData: FormData;
-  }>({
-    formData: {
-      firstName: '',
-      lastName: '',
-      email: '',
-    },
-    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
-    submittedData: {
-      firstName: '',
-      lastName: '',
-      email: '',
-    },
-  });
+  formData: FormData;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  submittedData: FormData;
+}>({
+  formData: {
+    name: '',
+    date: '',
+    type: '',
+    commune: '',
+    before: 0,
+    after: 0,
+    difference: 0,
+    price: 0,
+    calculated: 0,
+    additionalTax: 0,
+    sum: 0,
+    paymentDate: '',
+  },
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
+  submittedData: {
+    name: '',
+    date: '',
+    type: '',
+    commune: '',
+    before: 0,
+    after: 0,
+    difference: 0,
+    price: 0,
+    calculated: 0,
+    additionalTax: 0,
+    sum: 0,
+    paymentDate: '',
+  },
+});
 
 const FormContainer = () => {
   const [formData, setFormData] = React.useState<FormData>({
-    firstName: '',
-    lastName: '',
-    email: '',
+    name: '',
+    date: '',
+    type: '',
+    commune: '',
+    before: 0,
+    after: 0,
+    difference: 0,
+    price: 0,
+    calculated: 0,
+    additionalTax: 0,
+    sum: 0,
+    paymentDate: '',
   });
 
   const [submittedData, setSubmittedData] = React.useState<FormData>({
-    firstName: '',
-    lastName: '',
-    email: '',
+    name: '',
+    date: '',
+    type: '',
+    commune: '',
+    before: 0,
+    after: 0,
+    difference: 0,
+    price: 0,
+    calculated: 0,
+    additionalTax: 0,
+    sum: 0,
+    paymentDate: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
