@@ -5,13 +5,15 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from 'react-bootstrap/esm/Form';
 import Container from 'react-bootstrap/esm/Container';
+import InputGroup from 'react-bootstrap/esm/InputGroup';
+import { ServiceTypes } from '../Types/ServiceTypes';
 
 interface ComuteFormProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
-  const { formData, handleChange } = useContext(FormDataContext);
+  const { formData, handleChange, handleSelect } = useContext(FormDataContext);
 
   return (
     <Container>
@@ -38,12 +40,14 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
 
         <Form.Group className="mb-3" controlId="type">
           <Form.Label>Type</Form.Label>
-          <Form.Control
-            type="text"
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
-          />
+          <Form.Select name="type" value={formData.type} onChange={handleSelect}>
+            <option>Select a Service Type</option>
+            {Object.values(ServiceTypes).map((provider) => (
+              <option value={provider} key={provider}>
+                {provider}
+              </option>
+            ))}
+          </Form.Select>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="commune">
@@ -76,7 +80,7 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="after">
+        <Form.Group className="mb-3" controlId="difference">
           <Form.Label>Difference</Form.Label>
           <Form.Control
             type="number"
@@ -85,45 +89,57 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
             onChange={handleChange}
           />
         </Form.Group>
-
-        <Form.Group className="mb-3" controlId="after">
+        
+        <Form.Group className="mb-3" controlId="price">
           <Form.Label>Price</Form.Label>
-          <Form.Control
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-          />
+          <InputGroup>
+            <Form.Control
+              type="number"
+              name="price"
+              value={formData.price}
+              onChange={handleChange}
+            />
+            <InputGroup.Text>€</InputGroup.Text>
+          </InputGroup>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="after">
+        <Form.Group className="mb-3" controlId="calculated">
           <Form.Label>Calculated price</Form.Label>
-          <Form.Control
-            type="number"
-            name="calculated"
-            value={formData.calculated}
-            onChange={handleChange}
-          />
+          <InputGroup>
+            <Form.Control
+              type="number"
+              name="calculated"
+              value={formData.calculated}
+              onChange={handleChange}
+            />
+            <InputGroup.Text>€</InputGroup.Text>
+          </InputGroup>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="after">
+        <Form.Group className="mb-3" controlId="additionalTax">
           <Form.Label>Additional tax</Form.Label>
-          <Form.Control
-            type="number"
-            name="additional"
-            value={formData.additionalTax}
-            onChange={handleChange}
-          />
+          <InputGroup>
+            <Form.Control
+              type="number"
+              name="additionalTax"
+              value={formData.additionalTax}
+              onChange={handleChange}
+            />
+            <InputGroup.Text>€</InputGroup.Text>
+          </InputGroup>          
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="after">
+        <Form.Group className="mb-3" controlId="sum">
           <Form.Label>Sum</Form.Label>
-          <Form.Control
-            type="number"
-            name="sum"
-            value={formData.sum}
-            onChange={handleChange}
-          />
+          <InputGroup>
+            <Form.Control
+              type="number"
+              name="sum"
+              value={formData.sum}
+              onChange={handleChange}
+            />
+            <InputGroup.Text>€</InputGroup.Text>
+          </InputGroup>             
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="date">
@@ -132,6 +148,16 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
             type="date"
             name="paymentDate"
             value={formData.paymentDate}
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="comment">
+          <Form.Label>Comment</Form.Label>
+          <Form.Control
+            as="textarea"
+            name="comment"
+            value={formData.comment}
             onChange={handleChange}
           />
         </Form.Group>
