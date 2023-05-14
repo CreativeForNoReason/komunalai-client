@@ -65,7 +65,7 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
         <Form.Group className="mb-3" controlId="before">
           <Form.Label>Before</Form.Label>
           <Form.Control
-            type="number"
+            type="text"
             name="before"
             value={formData.before}
             onChange={handleChange}
@@ -75,7 +75,7 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
         <Form.Group className="mb-3" controlId="after">
           <Form.Label>After</Form.Label>
           <Form.Control
-            type="number"
+            type="text"
             name="after"
             value={formData.after}
             onChange={handleChange}
@@ -87,8 +87,8 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
           <Form.Control
             type="number"
             name="difference"
-            value={formData.difference}
-            onChange={handleChange}
+            value={formData.difference || ''}
+            readOnly
           />
         </Form.Group>
         
@@ -96,7 +96,7 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
           <Form.Label>Price</Form.Label>
           <InputGroup>
             <Form.Control
-              type="number"
+              type="text"
               name="price"
               value={formData.price}
               onChange={handleChange}
@@ -111,8 +111,8 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
             <Form.Control
               type="number"
               name="calculated"
-              value={formData.calculated}
-              onChange={handleChange}
+              value={formData.calculated || ''}
+              readOnly
             />
             <InputGroup.Text>€</InputGroup.Text>
           </InputGroup>
