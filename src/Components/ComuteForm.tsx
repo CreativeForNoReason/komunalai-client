@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './Comute.css';
 import { FormDataContext } from './FormContainer';
 import Button from 'react-bootstrap/Button';
@@ -6,14 +6,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from 'react-bootstrap/esm/Form';
 import Container from 'react-bootstrap/esm/Container';
 import InputGroup from 'react-bootstrap/esm/InputGroup';
-import { ServiceTypes } from '../Types/ServiceTypes';
+import { ServiceSubTypes, ServiceTypes } from '../Types/ServiceTypes';
 
 interface ComuteFormProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
-  const { formData, handleChange, handleSelect } = useContext(FormDataContext);
+  const { formData, handleChange, handleSelect, handleTypeSelect, selectedServiceType } = useContext(FormDataContext);
 
   return (
     <Container>
@@ -40,7 +40,7 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
 
         <Form.Group className="mb-3" controlId="type">
           <Form.Label>Type</Form.Label>
-          <Form.Select name="type" value={formData.type} onChange={handleSelect}>
+          <Form.Select name="type" value={formData.type} onChange={handleTypeSelect}>
             <option>Select a Service Type</option>
             {Object.values(ServiceTypes).map((provider) => (
               <option value={provider} key={provider}>
@@ -52,12 +52,14 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
 
         <Form.Group className="mb-3" controlId="commune">
           <Form.Label>Commune</Form.Label>
-          <Form.Control
-            type="text"
-            name="commune"
-            value={formData.commune}
-            onChange={handleChange}
-          />
+          <Form.Select name="commune" value={formData.commune} onChange={handleSelect}>
+            <option>Select a Commune</option>
+            {selectedServiceType && ServiceSubTypes[selectedServiceType].map((subtype) => (
+              <option value={subtype} key={subtype}>
+                {subtype}
+              </option>
+            ))}
+          </Form.Select>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="before">
