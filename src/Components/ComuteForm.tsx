@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/esm/Form';
 import Container from 'react-bootstrap/esm/Container';
 import InputGroup from 'react-bootstrap/esm/InputGroup';
 import { ServiceSubTypes, ServiceTypes } from '../Types/ServiceTypes';
+import NumberInputComp from './FormFields/NumberInputComp';
 
 interface ComuteFormProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -66,22 +67,12 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
 
         <Form.Group className="mb-3" controlId="before">
           <Form.Label>Before</Form.Label>
-          <Form.Control
-            type="text"
-            name="before"
-            value={formData.before}
-            onChange={handleChange}
-          />
+          <NumberInputComp name="before" value={formData.before}/>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="after">
           <Form.Label>After</Form.Label>
-          <Form.Control
-            type="text"
-            name="after"
-            value={formData.after}
-            onChange={handleChange}
-          />
+          <NumberInputComp name="after" value={formData.after} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="difference">

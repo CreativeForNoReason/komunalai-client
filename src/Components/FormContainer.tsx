@@ -10,6 +10,7 @@ export const FormDataContext = createContext<{
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleTypeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleNumberChange: (name: string, numberValue: number) => void;
   submittedData: FormData;
   selectedServiceType: ServiceTypes | null;
   priceInput: string;
@@ -19,6 +20,7 @@ export const FormDataContext = createContext<{
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
   handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => {},
   handleTypeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => {},
+  handleNumberChange: (name: string, numberValue: number) => {},
   submittedData: initialFormData,
   selectedServiceType: null,
   priceInput: '',
@@ -63,30 +65,25 @@ const FormContainer = () => {
 
       setFormData(newFormData);
     } else {
-      let newFormData;
-  
-      if (name === "before" || name === "after") {
-        // Ensure value is a number for specific fields
-        const numberValue = value === "" ? 0 : Number(value);
-        newFormData = { ...formData, [name]: numberValue };  
-  
-        if (!isNaN(newFormData.before) && !isNaN(newFormData.after)) {
-          // Calculate the difference
-          newFormData.difference = newFormData.after - newFormData.before;
-        }      
-  
-        if (!isNaN(newFormData.difference) && !isNaN(newFormData.price)) {
-          // Calculate the calculated price
-          newFormData.calculated = newFormData.difference * newFormData.price;
-        }
-        
-      } else {
-        // Handle non-numeric fields
-        newFormData = { ...formData, [name]: value };
-      }
-  
+      const newFormData = { ...formData, [name]: value };
       setFormData(newFormData);
+    }    
+  };
+
+  const handleNumberChange = (name: string, numberValue: number) => {
+    let newFormData = { ...formData, [name]: numberValue };
+  
+    if (!isNaN(newFormData.before) && !isNaN(newFormData.after)) {
+      // Calculate the difference
+      newFormData.difference = newFormData.after - newFormData.before;
+    }      
+  
+    if (!isNaN(newFormData.difference) && !isNaN(newFormData.price)) {
+      // Calculate the calculated price
+      newFormData.calculated = newFormData.difference * newFormData.price;
     }
+  
+    setFormData(newFormData);
   };
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -110,7 +107,7 @@ const FormContainer = () => {
   };
 
   return (
-    <FormDataContext.Provider value={{ formData, handleChange, handleSelect, handleTypeSelect, submittedData, selectedServiceType, priceInput, additionalTax }}>
+    <FormDataContext.Provider value={{ formData, handleChange, handleSelect, handleTypeSelect, handleNumberChange, submittedData, selectedServiceType, priceInput, additionalTax }}>
       <ComuteForm onSubmit={handleSubmit} />
       <hr></hr>
       <FormDataDisplay />
