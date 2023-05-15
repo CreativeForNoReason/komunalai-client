@@ -13,7 +13,7 @@ interface ComuteFormProps {
 }
 
 const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
-  const { formData, handleChange, handleSelect, handleTypeSelect, selectedServiceType } = useContext(FormDataContext);
+  const { formData, handleChange, handleSelect, handleTypeSelect, selectedServiceType, priceInput, additionalTax } = useContext(FormDataContext);
 
   return (
     <Container>
@@ -25,6 +25,7 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
             name="name"
             value={formData.name}
             onChange={handleChange}
+            required
           />
         </Form.Group>
 
@@ -35,13 +36,14 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
             name="date"
             value={formData.date}
             onChange={handleChange}
+            required
           />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="type">
           <Form.Label>Type</Form.Label>
-          <Form.Select name="type" value={formData.type} onChange={handleTypeSelect}>
-            <option>Select a Service Type</option>
+          <Form.Select name="type" value={formData.type} onChange={handleTypeSelect} required>
+            <option value="">Select a Service Type</option>
             {Object.values(ServiceTypes).map((provider) => (
               <option value={provider} key={provider}>
                 {provider}
@@ -52,8 +54,8 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
 
         <Form.Group className="mb-3" controlId="commune">
           <Form.Label>Commune</Form.Label>
-          <Form.Select name="commune" value={formData.commune} onChange={handleSelect}>
-            <option>Select a Commune</option>
+          <Form.Select name="commune" value={formData.commune} onChange={handleSelect} required>
+            <option value="">Select a Commune</option>
             {selectedServiceType && ServiceSubTypes[selectedServiceType].map((subtype) => (
               <option value={subtype} key={subtype}>
                 {subtype}
@@ -98,7 +100,7 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
             <Form.Control
               type="text"
               name="price"
-              value={formData.price}
+              value={priceInput}
               onChange={handleChange}
             />
             <InputGroup.Text>€</InputGroup.Text>
@@ -122,9 +124,9 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
           <Form.Label>Additional tax</Form.Label>
           <InputGroup>
             <Form.Control
-              type="number"
+              type="text"
               name="additionalTax"
-              value={formData.additionalTax}
+              value={additionalTax}
               onChange={handleChange}
             />
             <InputGroup.Text>€</InputGroup.Text>
@@ -137,8 +139,8 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
             <Form.Control
               type="number"
               name="sum"
-              value={formData.sum}
-              onChange={handleChange}
+              value={formData.sum || ''}
+              readOnly
             />
             <InputGroup.Text>€</InputGroup.Text>
           </InputGroup>             
