@@ -7,14 +7,17 @@ import Form from 'react-bootstrap/esm/Form';
 import Container from 'react-bootstrap/esm/Container';
 import InputGroup from 'react-bootstrap/esm/InputGroup';
 import { ServiceSubTypes, ServiceTypes } from '../Types/ServiceTypes';
-import NumberInputComp from './FormFields/NumberInputComp';
+import NumberInput from './FormFields/NumberInput';
+import DecimalInput from './FormFields/DecimalInput';
 
 interface ComuteFormProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
-  const { formData, handleChange, handleSelect, handleTypeSelect, selectedServiceType, priceInput, additionalTax } = useContext(FormDataContext);
+  const { formData, handleChange, handleSelect, handleTypeSelect, selectedServiceType } = useContext(FormDataContext);
+  const [priceInput, setPriceInput] = React.useState('');
+  const [additionalTax, setAdditionalTax] = React.useState('');
 
   return (
     <Container>
@@ -67,12 +70,12 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
 
         <Form.Group className="mb-3" controlId="before">
           <Form.Label>Before</Form.Label>
-          <NumberInputComp name="before" value={formData.before}/>
+          <NumberInput name="before" value={formData.before}/>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="after">
           <Form.Label>After</Form.Label>
-          <NumberInputComp name="after" value={formData.after} />
+          <NumberInput name="after" value={formData.after} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="difference">
@@ -88,12 +91,7 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
         <Form.Group className="mb-3" controlId="price">
           <Form.Label>Price</Form.Label>
           <InputGroup>
-            <Form.Control
-              type="text"
-              name="price"
-              value={priceInput}
-              onChange={handleChange}
-            />
+            <DecimalInput name='price' value={priceInput} setInput={setPriceInput} />
             <InputGroup.Text>€</InputGroup.Text>
           </InputGroup>
         </Form.Group>
@@ -114,12 +112,7 @@ const ComuteForm: React.FC<ComuteFormProps> = ({ onSubmit }) => {
         <Form.Group className="mb-3" controlId="additionalTax">
           <Form.Label>Additional tax</Form.Label>
           <InputGroup>
-            <Form.Control
-              type="text"
-              name="additionalTax"
-              value={additionalTax}
-              onChange={handleChange}
-            />
+            <DecimalInput name='additionalTax' value={additionalTax} setInput={setAdditionalTax} />
             <InputGroup.Text>€</InputGroup.Text>
           </InputGroup>          
         </Form.Group>

@@ -7,8 +7,8 @@ interface NumberInputProps {
     value: number;
 }
 
-const NumberInputComp: React.FC<NumberInputProps> = ({ name, value }) => {
-    const { handleNumberChange } = useContext(FormDataContext);  
+const NumberInput: React.FC<NumberInputProps> = ({ name, value }) => {
+    const { handleNumberChange } = useContext(FormDataContext);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
       const numberValue = value === "" ? 0 : Number(value);
@@ -25,4 +25,4 @@ const NumberInputComp: React.FC<NumberInputProps> = ({ name, value }) => {
     );
   };
   
-export default NumberInputComp;
+export default NumberInput;
