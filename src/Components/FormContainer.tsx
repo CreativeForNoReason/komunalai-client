@@ -12,7 +12,7 @@ export const FormDataContext = createContext<{
   handleTypeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleNumberChange: (name: string, numberValue: number) => void;
   handleDecimalNumberChange: (name: string, numberValue: number) => void;
-  submittedData: FormData;
+  submittedData: FormData[];
   selectedServiceType: ServiceTypes | null;
 }>({
   formData: initialFormData,
@@ -21,13 +21,13 @@ export const FormDataContext = createContext<{
   handleTypeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => {},
   handleNumberChange: (name: string, numberValue: number) => {},
   handleDecimalNumberChange: (name: string, numberValue: number) => {},
-  submittedData: initialFormData,
+  submittedData: [initialFormData],
   selectedServiceType: null
 });
 
 const FormContainer = () => {
   const [formData, setFormData] = React.useState<FormData>(initialFormData);
-  const [submittedData, setSubmittedData] = React.useState<FormData>(initialFormData);
+  const [submittedData, setSubmittedData] = React.useState<FormData[]>([]);
   const [selectedServiceType, setSelectedServiceType] = React.useState<ServiceTypes | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -80,7 +80,7 @@ const FormContainer = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmittedData(formData);
+    setSubmittedData([...submittedData, formData]);
     setFormData(initialFormData);
   };
 

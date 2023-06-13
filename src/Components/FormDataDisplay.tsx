@@ -25,20 +25,22 @@ const FormDataDisplay = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>{submittedData.name}</td>
-          <td>{submittedData.date}</td>
-          <td>{submittedData.type}</td>
-          <td>{submittedData.commune}</td>
-          <td>{submittedData.before}</td>
-          <td>{submittedData.after}</td>
-          <td>{submittedData.difference}</td>
-          <td>{submittedData.price}</td>
-          <td>{submittedData.calculated}</td>
-          <td>{submittedData.additionalTax}</td>
-          <td>{submittedData.sum}</td>
-          <td>{submittedData.paymentDate}</td>
-        </tr>
+        {submittedData.map((data, index) => (
+          <tr key={index}>
+            <td>{data.name}</td>
+            <td>{data.date}</td>
+            <td>{data.type}</td>
+            <td>{data.commune}</td>
+            <td>{data.before}</td>
+            <td>{data.after}</td>
+            <td>{data.difference}</td>
+            <td>{data.price}</td>
+            <td>{data.calculated}</td>
+            <td>{data.additionalTax}</td>
+            <td>{data.sum}</td>
+            <td>{data.paymentDate}</td>
+          </tr>
+        ))}
       </tbody>
     </Table>
   );
